@@ -1,4 +1,4 @@
-<div class="alert alert-success d-flex align-items-center"<?php echo $tipo;?> role="alert">
+<div class="alert alert-<?php echo $tipo;?> d-flex align-items-center" role="alert">
   <div>
     <?php echo $mensaje;?>
   </div>

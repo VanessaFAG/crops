@@ -12,7 +12,7 @@ class Invernadero extends Sistema {
         $insertar -> bindParam(':invernadero', $data['invernadero'], PDO::PARAM_STR);
         $insertar -> bindParam(':latitud',$data['latitud'], PDO::PARAM_STR);
         $insertar -> bindParam(':longitud',$data['longitud'], PDO::PARAM_STR);
-        $insertar -> bindParam(':area',$data['area'], PDO::PARAM_INT);
+        $insertar -> bindParam(':area',$data['area'], PDO::PARAM_STR);
         $insertar -> bindParam(':fecha_creacion',$data['fecha_creacion'], PDO::PARAM_STR);
         $insertar -> execute();
         $result = $insertar -> rowCount();
@@ -21,19 +21,19 @@ class Invernadero extends Sistema {
     function update($id, $data){
         $this -> conexion();
         $result = [];
-        $sql = "update invernadero set 
-        invernadero = :invernadero, 
-        latitud = :latitud, 
-        longitud = :longitud, 
-        area = :area, 
-        fecha_creacion = :fecha_creacion 
+        $sql = "update invernadero set
+        invernadero = :invernadero,
+        latitud = :latitud,
+        longitud = :longitud,
+        area = :area,
+        fecha_creacion = :fecha_creacion
         where id_invernadero = :id_invernadero;";
         $actualizar = $this->con->prepare($sql);
         $actualizar -> bindParam(':id_invernadero', $id, PDO::PARAM_INT);
         $actualizar -> bindParam(':invernadero', $data['invernadero'], PDO::PARAM_STR);
         $actualizar -> bindParam(':latitud',$data['latitud'], PDO::PARAM_STR);
         $actualizar -> bindParam(':longitud',$data['longitud'], PDO::PARAM_STR);
-        $actualizar -> bindParam(':area',$data['area'], PDO::PARAM_INT);
+        $actualizar -> bindParam(':area',$data['area'], PDO::PARAM_STR);
         $actualizar -> bindParam(':fecha_creacion',$data['fecha_creacion'], PDO::PARAM_STR);
         $actualizar -> execute();
         $result = $actualizar -> rowCount();

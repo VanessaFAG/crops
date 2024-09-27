@@ -11,7 +11,7 @@ action="invernadero.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:
 
 <div class="mb-3">
     <label for="exampleInvernadero" class="form-label">Área (m<sub>2</sub>)</label>
-    <input type="number" name="data[area]" placeholder="Escribe aqui el área" class="form-control" 
+    <input type="text" name="data[area]" placeholder="Escribe aqui el área" class="form-control" 
     value="<?php if(isset($invernaderos['area'])):echo($invernaderos['area']);endif;?>" />
 </div>
 

@@ -25,9 +25,7 @@ switch ($accion){
         $invernaderos = $app -> read_One($id);
         include "views/invernadero/crear.php";
         break;
-    case 'actializar':
-        print_r($_POST);
-        die();
+    case 'actualizar':
         $data = $_POST['data'];
         $result= $app->update($id, $data);
         if($result){
