@@ -1,11 +1,12 @@
 <?php
-include ('seccion.class.php');
+require_once ('seccion.class.php');
 $app = new Seccion;
 $accion = (isset($_GET['accion']) ? $_GET['accion'] : null); 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion){
     case 'crear':
         include "views/seccion/crear.php";
+        $invernadero = $appInvernadero  -> read_All(); 
         break;
     case 'nuevo':
         $data = $_POST['data'];
