@@ -1,7 +1,5 @@
 <?php 
 include ('../sistema.class.php');
-//include "../sistema.class.php";
-
 class Invernadero extends Sistema {
     function create ($data){
         $result = [];
