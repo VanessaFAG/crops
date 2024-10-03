@@ -16,17 +16,11 @@ action="seccion.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo
 </div>
 
 <div class="mb-3">
-    <label for="exampleSeccion" class="form-label">Id del Invernadero</label>
-    <input type="text" name="data[id_invernadero]" placeholder="Escribe el id del invernadero" class="form-control"
-    value="<?php if(isset($secciones['id_invernadero'])):echo($secciones['id_invernadero']);endif;?>"/>
-</div>
-
-<div class="mb-3">
     <label for="">Invernadero</label>
     <select name="data[id_invernadero]" id="" class="form-select form-select-sm" aria-label="Small select example">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <?php foreach($invernaderos as $invernadero):?>
+        <option value="<?php echo($invernadero['id_invernadero']);?>"><?php echo($invernadero['invernadero']);?></option>
+        <?php endforeach;?>
 </select>
 
 </div>

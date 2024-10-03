@@ -54,7 +54,7 @@ class Seccion extends Sistema {
     function read_All(){
         $this->conexion();
         $result = [];
-        $consulta = 'select * from seccion';
+        $consulta = 'select s.*, i.invernadero from seccion s join invernadero i on s.id_invernadero = i.id_invernadero';
         $sql = $this -> con -> prepare($consulta);
         $sql->execute();
         $result = $sql-> fetchAll(PDO::FETCH_ASSOC);
