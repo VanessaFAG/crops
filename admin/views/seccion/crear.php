@@ -18,8 +18,15 @@ action="seccion.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo
 <div class="mb-3">
     <label for="">Invernadero</label>
     <select name="data[id_invernadero]" id="" class="form-select form-select-sm" aria-label="Small select example">
+    <option selected>Invernaderos disponibles</option>
         <?php foreach($invernaderos as $invernadero):?>
-        <option value="<?php echo($invernadero['id_invernadero']);?>"><?php echo($invernadero['invernadero']);?></option>
+        <?php 
+        $selected = "";
+        if($secciones['id_invernadero'] == $invernadero['id_invernadero']){
+            $selected = "selected";
+        }        
+        ?>
+        <option value="<?php echo($invernadero['id_invernadero']);?>"><?php echo($selected);?><?php echo($invernadero['invernadero']);?></option>
         <?php endforeach;?>
 </select>
 

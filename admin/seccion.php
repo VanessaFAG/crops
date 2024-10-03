@@ -1,12 +1,14 @@
 <?php
 require_once ('seccion.class.php');
+require_once ('invernadero.class.php');
 $app = new Seccion;
+$appInvernadero = new Invernadero;
 $accion = (isset($_GET['accion']) ? $_GET['accion'] : null); 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion){
     case 'crear':
+        $invernaderos = $appInvernadero -> read_All(); 
         include "views/seccion/crear.php";
-        $invernadero = $app -> $appInvernadero -> read_All(); 
         break;
     case 'nuevo':
         $data = $_POST['data'];
@@ -23,6 +25,7 @@ switch ($accion){
         break;
     case 'modificar':
         $secciones = $app -> read_One($id);
+        $invernadero = $appInvernaderos -> read_All();
         include "views/seccion/crear.php";
         break;
     case 'actualizar':

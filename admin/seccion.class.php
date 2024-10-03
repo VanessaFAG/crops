@@ -34,11 +34,13 @@ class Seccion extends Sistema {
     function delete($id){
         $result = [];
         $this -> conexion();
-        $sql = "delete from seccion where id_seccion = :id_seccion;";
-        $eliminar = $this->con->prepare($sql);
-        $eliminar -> bindParam(':id_seccion', $id, PDO::PARAM_INT);
-        $eliminar -> execute();
-        $result = $eliminar -> rowCount();
+        if(is_numeric($id)){
+            $sql = "delete from seccion where id_seccion = :id_seccion;";
+            $eliminar = $this->con->prepare($sql);
+            $eliminar -> bindParam(':id_seccion', $id, PDO::PARAM_INT);
+            $eliminar -> execute();
+            $result = $eliminar -> rowCount();
+        }
         return $result;
     }
     function read_One($id){
