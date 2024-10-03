@@ -5,7 +5,7 @@ class Seccion extends Sistema {
         $result = [];
         $this->conexion();
         $sql = "insert into seccion(seccion, area, id_invernadero) 
-                values (:seccion, :area, :id_invernaderon);";
+                values (:seccion, :area, :id_invernadero);";
         $insertar = $this->con->prepare($sql);
         $insertar -> bindParam(':seccion', $data['seccion'], PDO::PARAM_STR);
         $insertar -> bindParam(':area', $data['area'], PDO::PARAM_INT);

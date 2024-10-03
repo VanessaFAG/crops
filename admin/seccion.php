@@ -25,7 +25,7 @@ switch ($accion){
         break;
     case 'modificar':
         $secciones = $app -> read_One($id);
-        $invernadero = $appInvernaderos -> read_All();
+        $invernaderos = $appInvernadero -> read_All();
         include "views/seccion/crear.php";
         break;
     case 'actualizar':
