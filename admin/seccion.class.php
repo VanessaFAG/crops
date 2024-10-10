@@ -20,12 +20,12 @@ class Seccion extends Sistema {
         $sql = "update seccion set
         seccion = :seccion,
         area = :area,
-        id_invernadero = :id_invernadero,
+        id_invernadero = :id_invernadero
         where id_seccion = :id_seccion;";
         $actualizar = $this->con->prepare($sql);
         $actualizar -> bindParam(':id_seccion', $id, PDO::PARAM_INT);
-        $actualizar -> bindParam(':seccion', $data['seccion'], PDO::PARAM_INT);
-        $actualizar -> bindParam(':area', $data['area'], PDO::PARAM_INT);
+        $actualizar -> bindParam(':seccion', $data['seccion'], PDO::PARAM_STR);
+        $actualizar -> bindParam(':area', $data['area'], PDO::PARAM_STR);
         $actualizar -> bindParam(':id_invernadero', $data['id_invernadero'], PDO::PARAM_INT);
         $actualizar -> execute();
         $result = $actualizar -> rowCount();
@@ -46,7 +46,7 @@ class Seccion extends Sistema {
     function read_One($id){
         $this -> conexion();
         $result = [];
-        $consulta = 'select * from seccion where id_seccion = :id_seccion';
+        $consulta = "select * from seccion where id_seccion = :id_seccion";
         $sql = $this -> con -> prepare($consulta);
         $sql->bindParam(':id_seccion', $id, PDO::PARAM_INT);
         $sql->execute();
@@ -56,7 +56,7 @@ class Seccion extends Sistema {
     function read_All(){
         $this->conexion();
         $result = [];
-        $consulta = 'select s.*, i.invernadero from seccion s join invernadero i on s.id_invernadero = i.id_invernadero';
+        $consulta = "select s.*, i.invernadero from seccion s join invernadero i on s.id_invernadero = i.id_invernadero";
         $sql = $this -> con -> prepare($consulta);
         $sql->execute();
         $result = $sql-> fetchAll(PDO::FETCH_ASSOC);

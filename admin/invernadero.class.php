@@ -50,7 +50,7 @@ class Invernadero extends Sistema {
     function read_One($id){
         $this -> conexion();
         $result = [];
-        $consulta = 'select * from invernadero where id_invernadero = :id_invernadero';
+        $consulta = "select * from invernadero where id_invernadero = :id_invernadero;";
         $sql = $this -> con -> prepare($consulta);
         $sql->bindParam(':id_invernadero', $id, PDO::PARAM_INT);
         $sql->execute();
@@ -60,7 +60,7 @@ class Invernadero extends Sistema {
     function read_All(){
         $this->conexion();
         $result = [];
-        $consulta = 'select * from invernadero';
+        $consulta = 'select * from invernadero;';
         $sql = $this -> con -> prepare($consulta);
         $sql->execute();
         $result = $sql-> fetchAll(PDO::FETCH_ASSOC);

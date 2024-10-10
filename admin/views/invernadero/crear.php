@@ -33,7 +33,6 @@ action="invernadero.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:
     value="<?php if(isset($invernaderos['fecha_creacion'])):echo($invernaderos['fecha_creacion']);endif;?>" />
 </div>
 
-    <input type="submit" name="data[enviar]" value="Guardar" class="btn btn-outline-info"
-    />
+    <input type="submit" name="data[enviar]" value="Guardar" class="btn btn-outline-info"/>
 </form>
 <?php require('views/footer.php');?>

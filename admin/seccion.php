@@ -14,7 +14,7 @@ switch ($accion){
         $data = $_POST['data'];
         $result= $app -> create($data);
         if($result){
-            $mensaje = "La seccion ha sido registrada.";
+            $mensaje = "La sección ha sido registrada.";
             $tipo = "success";
         } else {
             $mensaje = "Hubo un error, no se pudo registar correctamente.";

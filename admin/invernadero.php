@@ -11,7 +11,7 @@ switch ($accion){
         $data = $_POST['data'];
         $result= $app -> create($data);
         if($result){
-            $mensaje = "El invernaderó ha sido registrado";
+            $mensaje = "El invernadero ha sido registrado";
             $tipo = "success";
         } else {
             $mensaje = "Hubo un error";
@@ -28,7 +28,7 @@ switch ($accion){
         $data = $_POST['data'];
         $result= $app->update($id, $data);
         if($result){
-            $mensaje = "El invernaderó ha sido actualizado";
+            $mensaje = "El invernadero ha sido actualizado";
             $tipo = "success";
         } else {
             $mensaje = "Hubo un error, no se pudo actualizar";
@@ -43,10 +43,10 @@ switch ($accion){
             if(is_numeric($id)){
                 $result= $app->delete($id);
                 if($result){
-                    $mensaje = "El invernaderó se ha eliminado correctamente";
+                    $mensaje = "El invernadero se ha eliminado correctamente";
                     $tipo = "success";
                 } else {
-                    $mensaje = "Hubo un error";
+                    $mensaje = "Hubo un error al elimar el invernadero";
                     $tipo = "danger";
                 }
             } 
