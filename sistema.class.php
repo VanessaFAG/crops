@@ -65,6 +65,7 @@ class Sistema{
             $resultado = $login->fetchAll(PDO::FETCH_ASSOC);
             if(isset($resultado[0])){
                 $acceso = true;
+                $_SESSION['correo']=$correo
                 $_SESSION['validado']=$acceso;
                 $roles = $this -> getRoles($correo);
                 $privilegios = $this -> getPrivilegio($correo);
@@ -75,6 +76,13 @@ class Sistema{
         }
         $_SESSION['validado'] = false;
         return $acceso;
+    }
+    function checkRol($rol){
+        $roles = $_SESSION['roles'];
+        if(!in_array($rol,$roles)){
+            echo ("Error, no posees del rol.")
+            die();
+        }
     }
 }
 ?>

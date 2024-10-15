@@ -1,6 +1,7 @@
 <?php
 require_once ('invernadero.class.php');
 $app = new Invernadero;
+$app -> checkRol('Administrador');
 $accion = (isset($_GET['accion']) ? $_GET['accion'] : null); 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion){
