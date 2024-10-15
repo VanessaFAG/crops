@@ -13,13 +13,13 @@ class Sistema{
         $data = [];
         if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
             $sql = "select r.rol from rol r 
-                join usuario_rol ur on r.id_rol = ur.id_rol
-                join usuario u on ur.id_usuario = u.id_usuario
-            where u.correo =:correo";
-            $roles = $this -> con -> prerare($sql);
+                        join usuario_rol ur on r.id_rol = ur.id_rol
+                        join usuario u on ur.id_usuario = u.id_usuario
+                    where u.correo = :correo";
+            $roles = $this -> con -> prepare($sql);
             $roles -> bindParam(':correo', $correo, PDO::PARAM_STR);
             $roles -> execute();
-            $data = $sql -> fetchAll(PDO::FETCH_ASSOC); 
+            $data = $roles -> fetchAll(PDO::FETCH_ASSOC);
         }
         return $data;
     }
@@ -32,7 +32,7 @@ class Sistema{
                         join rol r on ur.id_rol = r.id_rol
                         join rol_permiso rp on r.id_rol = rp.id_rol
                         join permiso p on rp.id_permiso = p.id_permiso
-                    where correo = :correo";
+                    where u.correo = :correo";
             $privilegios = $this->con->prepare($sql);
             $privilegios->bindParam(':correo', $correo, PDO::PARAM_STR);
             $privilegios->execute();
