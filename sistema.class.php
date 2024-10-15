@@ -40,5 +40,23 @@ class Sistema{
         }
         return $data;
     }
+    function login($correo, $contraseña){
+        $contraseña = md5($contraseña);
+        $acceso = false;
+        if($correo filter_var($correo,FILTER_VALIDATE_EMAIL)){
+            $this -> conexion();
+            $sql = "select * from usuario 
+            where :correo = :correo and :contraseña = :contraseña";
+            $login = $this->con->prepare($sql);
+            $login->bindParam(':correo', $correo, PDO::PARAM_STR);
+            $login->bindParam(':contraseña', $contraseña, PDO::PARAM_STR);
+            $login->execute();
+            $resultado = $login->fetchAll(PDO::FETCH_ASSOC);
+            if(isset($resultado[0])){
+                acceso = true;
+            }
+        }
+        return $acceso;
+    }
 }
 ?>
