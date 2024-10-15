@@ -56,6 +56,10 @@ class Sistema{
             if(isset($resultado[0])){
                 $acceso = true;
                 $_SESSION['validado']=$acceso;
+                $roles = $this -> getRoles($correo);
+                $privilegios = $this -> getPrivilegio($correo);
+                $_SESSION['roles']=$roles;
+                $_SESSION['privilegios']=$privilegios;
                 return $acceso;
             }
         }
