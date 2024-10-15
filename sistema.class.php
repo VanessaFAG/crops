@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "config.class.php";
 class Sistema{
     var $con; 
@@ -53,9 +54,12 @@ class Sistema{
             $login->execute();
             $resultado = $login->fetchAll(PDO::FETCH_ASSOC);
             if(isset($resultado[0])){
-                acceso = true;
+                $acceso = true;
+                $_SESSION['validado']=$acceso;
+                return $acceso;
             }
         }
+        $_SESSION['validado'] = false;
         return $acceso;
     }
 }
