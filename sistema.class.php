@@ -21,6 +21,11 @@ class Sistema{
             $roles -> bindParam(':correo', $correo, PDO::PARAM_STR);
             $roles -> execute();
             $data = $roles -> fetchAll(PDO::FETCH_ASSOC);
+            $roles = [];
+            foreach($data as $rol){
+                array_push($roles, $rol['rol']);
+            }
+            $data = $roles
         }
         return $data;
     }
@@ -38,6 +43,11 @@ class Sistema{
             $privilegios->bindParam(':correo', $correo, PDO::PARAM_STR);
             $privilegios->execute();
             $data = $privilegios->fetchAll(PDO::FETCH_ASSOC);
+            $permisos = [];
+            foreach($data as $permiso){
+                array_push($permisos, $permiso['permiso']);
+            }
+            $data = $permisos;
         }
         return $data;
     }
