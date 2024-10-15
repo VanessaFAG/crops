@@ -11,7 +11,10 @@ switch ($accion) {
         }else{
             echo('Correo o contraseña incorrectos :(');
         }
-        break;
+    break;
+    case 'logout':
+        $app->logout();
+    break;
     default:
     include ('views/login/index.php');
     break;

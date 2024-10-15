@@ -77,6 +77,10 @@ class Sistema{
         $_SESSION['validado'] = false;
         return $acceso;
     }
+    function logout(){
+        unset($_SESSION);
+        session_destroy();
+    }
     function checkRol($rol){
         $roles = $_SESSION['roles'];
         if(!in_array($rol,$roles)){
