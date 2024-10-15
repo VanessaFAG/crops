@@ -80,7 +80,7 @@ class Sistema{
     function checkRol($rol){
         $roles = $_SESSION['roles'];
         if(!in_array($rol,$roles)){
-            echo ("Error, no posees del rol.")
+            echo ("Error, no posees del rol.");
             die();
         }
     }

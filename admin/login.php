@@ -7,10 +7,11 @@ switch ($accion) {
         $correo = $_POST['data']['correo'];
         $contraseña = $_POST['data']['contraseña'];
         if($app->login($correo, $contraseña)){
-            echo('Bienvenido al Sistema :D/')
+            echo('Bienvenido al Sistema :D/');
         }else{
             echo('Correo o contraseña incorrectos :(');
         }
+        break;
     default:
     include ('views/login/index.php');
     break;
