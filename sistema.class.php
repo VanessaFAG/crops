@@ -82,11 +82,12 @@ class Sistema{
         session_destroy();
         $mensaje = "Gracias por utilizar el sistema, se ha cerrado la sesión <a href ='login.php'>[presione aquí pars volver a entrar]</a>";
         $tipo = "success";
-        require_once('view/header.php');
+        require_once('views/header.php');
         $this -> alerta($tipo, $mensaje);
-        require_once('view/footer.php');
+        require_once('views/footer.php');
     }
     function checkRol($rol){
+        if(isset($_SESSION['roles'])){
         $roles = $_SESSION['roles'];
         if(!in_array($rol,$roles)){
             $mensaje = "Error, udted no tiene el rol adecuado";
@@ -95,6 +96,13 @@ class Sistema{
             $this -> alerta($tipo, $mensaje);
             die();
         }
+    }else {
+        $mensaje = "Requiere iniciar sesión. <a href='login.php'>[Presiome aquí para voler al Log In]</a>";
+        $tipo ="danger";
+         require_once "views/header/alert.php";
+         $this -> alerta($tipo, $mensaje);
+         die();
+    }
     }
 }
 ?>

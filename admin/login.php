@@ -7,9 +7,17 @@ switch ($accion) {
         $correo = $_POST['data']['correo'];
         $contraseña = $_POST['data']['password'];
         if($app->login($correo, $contraseña)){
-            echo('Bienvenido al Sistema :D/');
+            $mensaje = "Bienvenido al Sistema :D/";
+            $tipo = "success";
+            $app -> checkRol('Administrador');
+            require_once 'views/header/header_administrador.php';
+            $app -> alerta($tipo,$mensaje);
+            //pantalla personalizada
         }else{
-            echo('Correo o contraseña incorrectos :(');
+            $mensaje = "Correo o contraseña incorrectos :( <a href='login.php'>[Presione aquí para volver al Log In]</a>";
+            $tipo = "danger";
+            require_once 'views/header.php';
+            $app -> alerta($tipo,$mensaje);
         }
     break;
     case 'logout':
