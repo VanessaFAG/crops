@@ -1,8 +1,9 @@
 <?php
-require_once ('seccion.class.php');
-require_once ('invernadero.class.php');
+require_once 'seccion.class.php';
+require_once 'invernadero.class.php';
 $app = new Seccion;
 $appInvernadero = new Invernadero;
+$app -> checkRol('Administrador');
 $accion = (isset($_GET['accion']) ? $_GET['accion'] : null); 
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion){
@@ -62,4 +63,5 @@ switch ($accion){
         $secciones = $app->read_All();
         include "views/seccion/index.php";
 }
+require_once 'views/footer.php';
 ?>

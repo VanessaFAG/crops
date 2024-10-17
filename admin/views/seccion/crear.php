@@ -1,4 +1,5 @@
-<?php require('views/header.php'); ?>
+<?php require('views/header.php');
+require('views/header/header_administrador.php');?>
 <h1><?php if($accion == "crear"): echo('Nuevo'); else: echo ('Actualizar'); endif;?> Sección</h1>
 
 <form method="post" 

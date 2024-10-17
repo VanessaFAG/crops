@@ -1,5 +1,5 @@
 <?php
-require_once ('invernadero.class.php');
+require_once 'invernadero.class.php';
 $app = new Invernadero;
 $app -> checkRol('Administrador');
 $accion = (isset($_GET['accion']) ? $_GET['accion'] : null); 
@@ -59,4 +59,5 @@ switch ($accion){
         $invernaderos = $app->read_All();
         include "views/invernadero/index.php";
 }
+require_once 'views/footer.php';
 ?>
