@@ -25,7 +25,7 @@ class Sistema{
             foreach($data as $rol){
                 array_push($roles, $rol['rol']);
             }
-            $data = $roles
+            $data = $roles;
         }
         return $data;
     }
@@ -51,23 +51,23 @@ class Sistema{
         }
         return $data;
     }
-    function login($correo, $contraseña){
-        $contraseña = md5($contraseña);
+    function login($correo, $password){
+        $password = md5($password);
         $acceso = false;
-        if($correo filter_var($correo,FILTER_VALIDATE_EMAIL)){
+        if(filter_var($correo, FILTER_VALIDATE_EMAIL)){
             $this -> conexion();
             $sql = "select * from usuario 
-            where :correo = :correo and :contraseña = :contraseña";
+            where correo = :correo and password = :password";
             $login = $this->con->prepare($sql);
             $login->bindParam(':correo', $correo, PDO::PARAM_STR);
-            $login->bindParam(':contraseña', $contraseña, PDO::PARAM_STR);
+            $login->bindParam(':password', $password, PDO::PARAM_STR);
             $login->execute();
             $resultado = $login->fetchAll(PDO::FETCH_ASSOC);
             if(isset($resultado[0])){
                 $acceso = true;
-                $_SESSION['correo']=$correo
+                $_SESSION['correo']=$correo;
                 $_SESSION['validado']=$acceso;
-                $roles = $this -> getRoles($correo);
+                $roles = $this -> getRol($correo);
                 $privilegios = $this -> getPrivilegio($correo);
                 $_SESSION['roles']=$roles;
                 $_SESSION['privilegios']=$privilegios;

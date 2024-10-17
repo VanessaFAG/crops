@@ -5,7 +5,7 @@ $accion = (isset($_GET['accion']) ? $_GET['accion'] : null);
 switch ($accion) {
     case 'login':
         $correo = $_POST['data']['correo'];
-        $contraseña = $_POST['data']['contraseña'];
+        $contraseña = $_POST['data']['password'];
         if($app->login($correo, $contraseña)){
             echo('Bienvenido al Sistema :D/');
         }else{
