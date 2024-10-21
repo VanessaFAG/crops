@@ -46,7 +46,7 @@ switch ($accion){
         $id = (isset($_GET['id'])) ? $_GET['id'] : null;
         if(!is_null($id)){
             if(is_numeric($id)){
-                $result= $app->delete($id);
+                $result = $app->delete($id);
                 if($result){
                     $mensaje = "La sección se ha eliminado correctamente.";
                     $tipo = "success";

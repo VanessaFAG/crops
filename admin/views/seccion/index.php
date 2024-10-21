@@ -30,4 +30,4 @@ require('views/header/header_administrador.php');?>
     <?php endforeach; ?>
   </tbody>
 </table>
-<?php require('views/footer.php'); ?>
+<?php require('views/footer.php');?>

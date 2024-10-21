@@ -16,6 +16,16 @@
             <li><a class="dropdown-item" href="seccion.php">Secciones</a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuarios
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="privilegio.php">Permisos</a></li>
+            <li><a class="dropdown-item" href="rol.php">Roles</a></li>
+            <li><a class="dropdown-item" href="usuario.php">Usuarios</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link" aria-disabled="true" href="login.php?accion=logout">Salir</a>
         </li>
