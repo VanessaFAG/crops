@@ -21,7 +21,7 @@ class Rol extends Sistema {
             $id_rol = isset($result['id_rol']) ? $result['id_rol'] : null;
             if(!is_null($id_rol)){
                 foreach($privilegio as $priv => $p){
-                    $query = "insert into rol_permiso(id_rol, id_permiso
+                    $query = "insert into rol_permiso(id_rol, id_permiso)
                     values(:id_rol, :id_permiso);";
                     $insertarPermiso = $this->con->prepare($query);
                     $insertarPermiso -> bindParam(':id_rol', $id_rol, PDO::PARAM_INT);

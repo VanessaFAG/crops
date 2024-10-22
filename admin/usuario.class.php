@@ -29,7 +29,7 @@ class Usuario extends Sistema{
                     $insertarRol -> bindParam(':id_rol', $r, PDO::PARAM_INT);
                     $insertarRol -> execute();
                 }
-                $this -> con -> commit() ;
+                $this -> con -> commit();
                 return $insertar -> rowCount();
             }
         } catch (Exception $e) {

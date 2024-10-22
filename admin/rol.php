@@ -12,7 +12,7 @@ switch ($accion) {
         include 'views/rol/form.php';
         break;
     case 'nuevo':
-        $data = $_POST['data'];
+        $data = $_POST;
         $result = $app -> create($data);
         if($result){
             $mensaje = "El rol ha sido registrado corectamente.";
