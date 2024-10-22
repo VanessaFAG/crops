@@ -1,6 +1,6 @@
 <?php
 require_once 'usuario.class.php';
-require_once 'rol.class.php';
+include 'rol.class.php';
 $app = new Usuario;
 $appRol = new Rol;
 $app -> checkRol('Administrador');
@@ -12,8 +12,8 @@ switch ($accion) {
         include 'views/usuario/form.php';
         break;
     case 'nuevo':
-        $data = $_POST['data'];
-        $result= $app -> create($data);
+        $data = $_POST;
+        $result = $app -> create($data);
         if($result){
             $mensaje = "El usuario ha sido registrado correctamente.";
             $tipo = "success";

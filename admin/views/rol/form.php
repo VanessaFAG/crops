@@ -17,8 +17,9 @@ action="rol.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo('ac
     <?php foreach($privilegios as $privilegio): ?>
         <div class="form-check">
             <input type="checkbox" name="data[privilegios][]" 
-            value="<?php echo $privilegio['id_permiso'];?>" name ="data[privilegio][]"
+            value="<?php echo $privilegio['id_permiso'];?>"
             <?php echo in_array($privilegio['id_permiso'], $privilegiosRolID)?"checked":"";?>>
+            
             <label class="form-check-label" for="exampleCheck1">
                 <?php echo($privilegio['permiso']);?>
             </label>

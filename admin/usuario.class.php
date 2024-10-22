@@ -4,13 +4,15 @@ class Usuario extends Sistema{
     function create ($data){
         $result = [];
         $this->conexion();
+        $data  = $data['data'];
+        $this -> con -> beginTransaction();
         $sql = "insert into usuario(correo, password)
                 values (:correo, md5(:password));";
         $insertar = $this->con->prepare($sql);
         $insertar -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
         $insertar -> bindParam(':password', $data['password'], PDO::PARAM_STR);
         $insertar -> execute();
-        $result = $insertar -> rowCount();
+        $this -> con -> commit() ;
         return $result;
     }
     function update($data, $id){

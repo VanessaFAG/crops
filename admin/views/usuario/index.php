@@ -3,7 +3,7 @@ require('views/header.php');
 require('views/header/header_administrador.php');?>
     <h1>Usuarios</h1>
     <?php if(isset($mensaje)):$app->alerta($tipo,$mensaje);endif; ?>
-    <a href="seccion.php?accion=crear" class="btn btn-outline-success">Nuevo</a>
+    <a href="usuario.php?accion=crear" class="btn btn-outline-success">Nuevo</a>
     <table class="table">
   <thead>
     <tr>
