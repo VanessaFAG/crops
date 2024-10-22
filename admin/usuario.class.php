@@ -26,9 +26,8 @@ class Usuario extends Sistema{
                         values(:id_usuario, :id_rol);";
                         $insertarRol = $this -> con -> prepare($sql);
                         $insertarRol -> bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-                        $insertarRol -> bindParam(':id_rol', $k, PDO::PARAM_INT);
+                        $insertarRol -> bindParam(':id_rol', $r, PDO::PARAM_INT);
                         $insertarRol -> execute();
-
                     }
                     $this -> con -> commit() ;
                     return $insertar -> rowCount();
@@ -84,6 +83,18 @@ class Usuario extends Sistema{
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+    function read_All_Roles($id) {
+        $this->conexion();
+        $result = [];
+        $sql = "select u.*, r.rol from usuario u
+        join usuario_rol ur on u.id_usuario = ur.id_usuario
+        join rol r on ur.id_rol = r.id_rol
+        where id_usuario = :id_usuario;";
+        $consulta = $this->con->prepare($sql);
+        $consulta->bindParam(':id_usuario', $id, PDO::PARAM_INT);
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
