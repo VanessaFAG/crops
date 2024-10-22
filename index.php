@@ -1,0 +1,15 @@
+<?php
+echo "Esto es el index";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="image/huohuo.png" alt="">
+</body>
+</html>
