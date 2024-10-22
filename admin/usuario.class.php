@@ -19,7 +19,12 @@ class Usuario extends Sistema{
                 $consulta -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
                 $consulta -> execute();
                 $datos =  $consulta->fetch(PDO::FETCH_ASSOC);
-                
+                $id_usuario = isset($datos['id_usuario']) ? $datos['id_usuario'] : null;
+                if(!is_null($id_usuario)){
+                    foreach($rol as $r){
+                        $sql = "insert into "
+                    }
+                }
                 $this -> con -> commit() ;
                 return $insertar -> rowCount();
         } catch (Exception $e) {
