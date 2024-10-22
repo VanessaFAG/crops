@@ -12,21 +12,16 @@ action="rol.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo('ac
     value="<?php if(isset($roles['rol'])):echo($roles['rol']);endif;?>" />
 </div>
 
-<div class="mb-3">
-    <label for="exampleRol" class="form-label">Privilegios/Permisos</label>
-    <?php foreach($privilegios as $privilegio): ?>
-        <div class="form-check">
-            <input type="checkbox" name="data[privilegios][]" 
-            value="<?php echo $privilegio['id_permiso'];?>"
-            <?php echo in_array($privilegio['id_permiso'], $privilegiosRolID)?"checked":"";?>>
-            
-            <label class="form-check-label" for="exampleCheck1">
-                <?php echo($privilegio['permiso']);?>
-            </label>
-        </div>
-    <?php endforeach;?>
-
+<p class="fs-5">Privilegios/Permisos del rol.</p>
+<div class="privilegios">
+    <?php foreach ($privilegios as $privilegio) :?>
+    <div class="form-check form-switch">
+        <input name="permiso[]" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="<?php echo $privilegio['id_permiso']; ?>">
+        <label class="form-check-label" for="flexSwitchCheckDefault"><?php echo $privilegio['permiso']; ?></label>
+    </div>
+    <?php endforeach; ?>
 </div>
+
     <input type="submit" name="data[enviar]" value="Guardar" class="btn btn-outline-info"
     />
 </form>

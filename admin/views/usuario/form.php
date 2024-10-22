@@ -7,13 +7,13 @@ action="usuario.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo
 <div class="mb-3">
     <label for="exampleUsuario" class="form-label">Correo del usuario</label>
     <input type="text" name="data[correo]" placeholder="Escribe aquí el correo" class="form-control" 
-    value="<?php if(isset($usuarioes['correo'])):echo($usuarioes['correo']);endif;?>" />
+    value="<?php if(isset($usuarios['correo'])):echo($usuarios['correo']);endif;?>" />
 </div>
 
 <div class="mb-3">
     <label for="exampleUsuario" class="form-label">Contraseña</label>
     <input type="password" name="data[password]" placeholder="Escribe aquí la constraseña" class="form-control" 
-    value="<?php if(isset($usuarioes['password'])):echo($usuarioes['password']);endif;?>" />
+    value="<?php if(isset($usuarios['password'])):echo($usuarios['password']);endif;?>" />
 </div>
 <p class="fs-5">Rol del usuario</p>
 <div class="roles">

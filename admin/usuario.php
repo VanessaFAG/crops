@@ -27,7 +27,7 @@ switch ($accion) {
         break;
     case 'modificar':
         $usuarios = $app -> read_One($id);
-        $roles = $app -> read_All();
+        $roles = $appRol -> get_All();
         include 'views/usuario/form.php';
         break;
     case 'actualizar':
