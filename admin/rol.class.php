@@ -4,40 +4,37 @@ class Rol extends Sistema {
     function create ($data){
         $result = [];
         $this -> conexion();
-        /*try {
-            $this -> con -> beginTransaction();
-            $sql = "select id_rol from rol where rol =:rol"
-            $insertar = $this -> con -> prepare($sql);
-            $insertar -> bindParam(':rol', $data['rol'], PDO::PARAM_STR);
-            $insertar -> execute();
-            $result =  $insertar -> fetch(PDO::FETCH_ASSOC);
-            if($result){
-                $mensaje = "El rol ya existe";
-                $tipo = "danger";
-                $this -> alert($mensaje, $tipo);
-                $this -> con -> rollBack(); 
-                return false;
-            }
-            $sql = "insert into rol(rol) values (:rol);";
+        $privilegio = $data['permiso'];
+        $data = $data['data'];
+        $this -> con -> beginTransaction();
+        try {
+            $sql = "insert into rol(rol) 
+            values(:rol);";
             $insertar = $this->con->prepare($sql);
             $insertar -> bindParam(':rol', $data['rol'], PDO::PARAM_STR);
             $insertar -> execute();
-            if(isset($data['permiso'])&&is_array($datos['permiso'])){
-                foreach($data['permiso'] as $id_rol){
-                $sql = "insert into rol_permiso(id_rol,id_permiso) 
-                values (:id_rol, :id_permiso);";
-                $insertarPermiso = $this->con->prepare($sql);
-                $insertarPermiso -> bindParam(':id_rol', $id_rol, PDO::PARAM_INT);
-                $insertarPermiso -> bindParam(':id_permiso', $id, PDO::PARAM_INT);
-                $insertarPermiso -> execute();
+            $sql = "select id_rol from rol where rol = :rol;";
+            $consulta = $this->con->prepare($sql);
+            $consulta -> bindParam(':rol', $data['rol'], PDO::PARAM_STR);
+            $consulta -> execute();
+            $result = $consulta -> fetch(PDO::FETCH_ASSOC);
+            $id_rol = isset($result['id_rol']) ? $result['id_rol'] : null;
+            if(!is_null($id_rol)){
+                foreach($privilegio as $priv => $p){
+                    $query = "insert into rol_permiso(id_rol, id_permiso
+                    values(:id_rol, :id_permiso);";
+                    $insertarPermiso = $this->con->prepare($query);
+                    $insertarPermiso -> bindParam(':id_rol', $id_rol, PDO::PARAM_INT);
+                    $insertarPermiso -> bindParam(':id_permiso', $p, PDO::PARAM_INT);
+                    $insertarPermiso -> execute();
                 }
+                $this -> con -> commit();
+                return $insertar -> rowCount();
             }
-            $this -> con -> commit();
-            return true;
-        } catch (PDOException $e) {
+        }catch (Exception $e) {
             $this -> con -> rollBack();
-            return false;
-        }*/
+        }
+        return false;
     }
     function update($data, $id){
         $result = [];

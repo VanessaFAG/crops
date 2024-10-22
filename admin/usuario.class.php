@@ -9,29 +9,29 @@ class Usuario extends Sistema{
         $this -> con -> beginTransaction();
         try {
             $sql = "insert into usuario(correo, password)
-                values (:correo, md5(:password));";
-                $insertar = $this->con->prepare($sql);
-                $insertar -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
-                $insertar -> bindParam(':password', $data['password'], PDO::PARAM_STR);
-                $insertar -> execute();
-                $sql = "select id_usuario from usuario where correo = :correo;";
-                $consulta = $this -> con -> prepare($sql);
-                $consulta -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
-                $consulta -> execute();
-                $datos =  $consulta->fetch(PDO::FETCH_ASSOC);
-                $id_usuario = isset($datos['id_usuario']) ? $datos['id_usuario'] : null;
-                if(!is_null($id_usuario)){
-                    foreach($rol as $r => $k){
-                        $sql = "insert into usuario_rol(id_usuario, id_rol)
-                        values(:id_usuario, :id_rol);";
-                        $insertarRol = $this -> con -> prepare($sql);
-                        $insertarRol -> bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-                        $insertarRol -> bindParam(':id_rol', $r, PDO::PARAM_INT);
-                        $insertarRol -> execute();
-                    }
-                    $this -> con -> commit() ;
-                    return $insertar -> rowCount();
+            values (:correo, md5(:password));";
+            $insertar = $this->con->prepare($sql);
+            $insertar -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
+            $insertar -> bindParam(':password', $data['password'], PDO::PARAM_STR);
+            $insertar -> execute();
+            $sql = "select id_usuario from usuario where correo = :correo;";
+            $consulta = $this -> con -> prepare($sql);
+            $consulta -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
+            $consulta -> execute();
+            $datos =  $consulta->fetch(PDO::FETCH_ASSOC);
+            $id_usuario = isset($datos['id_usuario']) ? $datos['id_usuario'] : null;
+            if(!is_null($id_usuario)){
+                foreach($rol as $r => $k){
+                    $sql = "insert into usuario_rol(id_usuario, id_rol)
+                    values(:id_usuario, :id_rol);";
+                    $insertarRol = $this -> con -> prepare($sql);
+                    $insertarRol -> bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+                    $insertarRol -> bindParam(':id_rol', $r, PDO::PARAM_INT);
+                    $insertarRol -> execute();
                 }
+                $this -> con -> commit() ;
+                return $insertar -> rowCount();
+            }
         } catch (Exception $e) {
             $this -> con -> rollBack();
         }
