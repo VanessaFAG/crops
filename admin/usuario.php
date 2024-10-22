@@ -8,7 +8,8 @@ $accion = (isset($_GET['accion']) ? $_GET['accion'] : null);
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion) {
     case 'crear':
-        $roles = $appRol -> read_All();
+        // $roles = $appRol -> read_All();
+        $roles = $appRol -> get_All();
         include 'views/usuario/form.php';
         break;
     case 'nuevo':
@@ -28,6 +29,7 @@ switch ($accion) {
         $usuarios = $app -> read_One($id);
         $roles = $app -> read_All();
         include 'views/usuario/form.php';
+        break;
     case 'actualizar':
         $data = $_POST['data'];
         $result= $app -> update($id, $data);
