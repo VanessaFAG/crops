@@ -4,16 +4,28 @@ class Usuario extends Sistema{
     function create ($data){
         $result = [];
         $this->conexion();
-        $data  = $data['data'];
+        $rol = $data['rol']
+        $data = $data['data'];
         $this -> con -> beginTransaction();
-        $sql = "insert into usuario(correo, password)
+        try {
+            $sql = "insert into usuario(correo, password)
                 values (:correo, md5(:password));";
-        $insertar = $this->con->prepare($sql);
-        $insertar -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
-        $insertar -> bindParam(':password', $data['password'], PDO::PARAM_STR);
-        $insertar -> execute();
-        $this -> con -> commit() ;
-        return $result;
+                $insertar = $this->con->prepare($sql);
+                $insertar -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
+                $insertar -> bindParam(':password', $data['password'], PDO::PARAM_STR);
+                $insertar -> execute();
+                $sql = "select id_usuario from usuario where correo = :correo;";
+                $consulta = $this->con->prepare($sql);
+                $consulta -> bindParam(':correo', $data['correo'], PDO::PARAM_STR);
+                $consulta -> execute();
+                $datos =  $consulta->fetch(PDO::FETCH_ASSOC);
+                
+                $this -> con -> commit() ;
+                return $insertar -> rowCount();
+        } catch (Exception $e) {
+            $this -> con -> rollBack();
+        }
+        return false;
     }
     function update($data, $id){
         $result = [];
