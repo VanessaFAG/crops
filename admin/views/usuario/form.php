@@ -19,7 +19,7 @@ action="usuario.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo
 <div class="roles">
     <?php foreach ($roles as $rol) :?>
     <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <input name="rol[]" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="<?php echo $rol['id_rol']; ?>">
         <label class="form-check-label" for="flexSwitchCheckDefault"><?php echo $rol['rol']; ?></label>
     </div>
     <?php endforeach; ?>
