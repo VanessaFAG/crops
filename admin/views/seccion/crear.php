@@ -32,7 +32,6 @@ action="seccion.php?accion=<?php if($accion == "crear"):echo('nuevo'); else:echo
 </select>
 
 </div>
-    <input type="submit" name="data[enviar]" value="Guardar" class="btn btn-outline-info"
-    />
+    <input type="submit" name="data[enviar]" value="Guardar" class="btn btn-outline-info"/>
 </form>
 <?php require('views/footer.php');?>

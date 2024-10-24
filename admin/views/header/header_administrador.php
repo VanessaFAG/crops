@@ -1,4 +1,4 @@
-<?php require_once('views/header.php')?>
+<?php require_once('views/header.php');?>
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
 <div class="container-fluid">
     <a class="navbar-brand" href="index.php">Administrador</a>

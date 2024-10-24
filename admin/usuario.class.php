@@ -54,14 +54,24 @@ class Usuario extends Sistema{
     function delete($id){
         $result = [];
         $this -> conexion();
-        if(is_numeric($id)){
-            $sql = "delete from usuario where id_usuario = :id_usuario;";
-            $eliminar = $this->con->prepare($sql);
-            $eliminar -> bindParam(':id_usuario', $id, PDO::PARAM_INT);
-            $eliminar -> execute();
-            $result = $eliminar -> rowCount();
+        $this -> con -> beginTransaction();
+        try {
+            if(is_numeric($id)){
+                $sql = "delete from usuario_rol where id_usuario = :id_usuario;";
+                $eliminarRol = $this->con->prepare($sql);
+                $eliminarRol -> bindParam(':id_usuario', $id, PDO::PARAM_INT);
+                $eliminarRol -> execute();
+                $sql = "delete from usuario where id_usuario = :id_usuario;";
+                $eliminar = $this->con->prepare($sql);
+                $eliminar -> bindParam(':id_usuario', $id, PDO::PARAM_INT);
+                $eliminar -> execute();
+            }
+            $this -> con -> commit();
+            return $result = $eliminar -> rowCount();
+        } catch (Exception $e) {
+            $this -> con -> rollBack();
         }
-        return $result;
+        return false;
     }
     function read_One($id){
         $this -> conexion();

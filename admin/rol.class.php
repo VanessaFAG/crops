@@ -50,12 +50,23 @@ class Rol extends Sistema {
     function delete($id){
         $result = [];
         $this -> conexion();
-        $sql = "delete from rol where id_rol = :id_rol;";
-        $eliminar = $this->con->prepare($sql);
-        $eliminar -> bindParam(':id_rol', $id, PDO::PARAM_INT);
-        $eliminar -> execute();
-        $result = $eliminar -> rowCount();
-        return $result;
+        $this -> con -> beginTransaction();
+        try{
+            $sql = "delete from rol_permiso where id_rol = :id_rol;";
+            $eliminarPermiso = $this->con->prepare($sql);
+            $eliminarPermiso -> bindParam(':id_rol', $id, PDO::PARAM_INT);
+            $eliminarPermiso -> execute();
+            $sql = "delete from rol where id_rol = :id_rol;";
+            $eliminar = $this->con->prepare($sql);
+            $eliminar -> bindParam(':id_rol', $id, PDO::PARAM_INT);
+            $eliminar -> execute();
+            $result = $eliminar -> rowCount();
+            $this -> con -> commit();
+            return $result;
+    }catch (Exception $e) {
+        $this -> con -> rollBack();
+    }
+        return false;
     }
     function read_One($id){
         $this -> conexion();
