@@ -59,18 +59,18 @@ class Sistema{
             $sql = "select * from usuario 
             where correo = :correo and password = :password";
             $login = $this->con->prepare($sql);
-            $login->bindParam(':correo', $correo, PDO::PARAM_STR);
-            $login->bindParam(':password', $password, PDO::PARAM_STR);
-            $login->execute();
-            $resultado = $login->fetchAll(PDO::FETCH_ASSOC);
+            $login -> bindParam(':correo', $correo, PDO::PARAM_STR);
+            $login -> bindParam(':password', $password, PDO::PARAM_STR);
+            $login -> execute();
+            $resultado = $login -> fetchAll(PDO::FETCH_ASSOC);
             if(isset($resultado[0])){
                 $acceso = true;
-                $_SESSION['correo']=$correo;
-                $_SESSION['validado']=$acceso;
+                $_SESSION['correo'] = $correo;
+                $_SESSION['validado'] = $acceso;
                 $roles = $this -> getRol($correo);
                 $privilegios = $this -> getPrivilegio($correo);
-                $_SESSION['roles']=$roles;
-                $_SESSION['privilegios']=$privilegios;
+                $_SESSION['roles'] = $roles;
+                $_SESSION['privilegios'] = $privilegios;
                 return $acceso;
             }
         }
@@ -88,21 +88,21 @@ class Sistema{
     }
     function checkRol($rol){
         if(isset($_SESSION['roles'])){
-        $roles = $_SESSION['roles'];
-        if(!in_array($rol,$roles)){
-            $mensaje = "Error, usted no tiene el rol adecuado";
+            $roles = $_SESSION['roles'];
+            if(!in_array($rol,$roles)){
+                $mensaje = "Error, usted no tiene el rol adecuado";
+                $tipo ="danger";
+                require_once "views/header/alert.php";
+                $this -> alerta($tipo, $mensaje);
+                die();
+            }
+        }else {
+            $mensaje = "Requiere iniciar sesión. <a href='login.php'>[Presiome aquí para voler al Log In]</a>";
             $tipo ="danger";
             require_once "views/header/alert.php";
             $this -> alerta($tipo, $mensaje);
             die();
         }
-    }else {
-        $mensaje = "Requiere iniciar sesión. <a href='login.php'>[Presiome aquí para voler al Log In]</a>";
-        $tipo ="danger";
-         require_once "views/header/alert.php";
-         $this -> alerta($tipo, $mensaje);
-         die();
-    }
     }
 }
 ?>
