@@ -106,5 +106,20 @@ class Usuario extends Sistema{
         $consulta->execute();
         $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /*public function read_All() {
+        $this->conexion();
+        $query = "SELECT u.*, GROUP_CONCAT(r.rol SEPARATOR ', ') AS rol
+                  FROM usuario u
+                  JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario
+                  JOIN rol r ON ur.id_rol = r.id_rol
+                  GROUP BY u.id_usuario";
+        
+        $consulta = $this->con->prepare($query);
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }*/
 }
 ?>
