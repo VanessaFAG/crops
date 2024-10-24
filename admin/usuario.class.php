@@ -26,7 +26,7 @@ class Usuario extends Sistema{
                     values(:id_usuario, :id_rol);";
                     $insertarRol = $this -> con -> prepare($sql);
                     $insertarRol -> bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-                    $insertarRol -> bindParam(':id_rol', $r, PDO::PARAM_INT);
+                    $insertarRol -> bindParam(':id_rol', $k, PDO::PARAM_INT);
                     $insertarRol -> execute();
                 }
                 $this -> con -> commit();
@@ -83,15 +83,18 @@ class Usuario extends Sistema{
         $result = $sql -> fetch(PDO::FETCH_ASSOC);
         return $result;
     }
-    function read_All(){
+    function read_All() {
         $this->conexion();
-        $result = [];
-        $sql = "select u.*, r.rol from usuario u
-        join usuario_rol ur on u.id_usuario = ur.id_usuario
-        join rol r on ur.id_rol = r.id_rol;";
-        $sql = $this->con->prepare($sql);
-        $sql->execute();
-        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT u.*, GROUP_CONCAT(r.rol SEPARATOR ', ') AS rol
+                  FROM usuario u
+                  JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario
+                  JOIN rol r ON ur.id_rol = r.id_rol
+                  GROUP BY u.id_usuario";
+        
+        $consulta = $this->con->prepare($query);
+        $consulta->execute();
+        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        
         return $result;
     }
     function read_All_Roles($id) {
@@ -106,20 +109,5 @@ class Usuario extends Sistema{
         $consulta->execute();
         $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    /*public function read_All() {
-        $this->conexion();
-        $query = "SELECT u.*, GROUP_CONCAT(r.rol SEPARATOR ', ') AS rol
-                  FROM usuario u
-                  JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario
-                  JOIN rol r ON ur.id_rol = r.id_rol
-                  GROUP BY u.id_usuario";
-        
-        $consulta = $this->con->prepare($query);
-        $consulta->execute();
-        $result = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $result;
-    }*/
 }
 ?>
