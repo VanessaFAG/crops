@@ -58,7 +58,7 @@ class Sistema{
             $this -> conexion();
             $sql = "select * from usuario 
             where correo = :correo and password = :password";
-            $login = $this->con->prepare($sql);
+            $login = $this -> con -> prepare($sql);
             $login -> bindParam(':correo', $correo, PDO::PARAM_STR);
             $login -> bindParam(':password', $password, PDO::PARAM_STR);
             $login -> execute();
